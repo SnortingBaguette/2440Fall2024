@@ -1,0 +1,25 @@
+// Create base spehere
+polySphere -radius 3 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 3 0;
+
+//Create middle spehere
+polySphere -radius 1 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+polySphere -e -radius 2;
+move -relative -objectSpace -worldSpaceDistance 0 7 0;
+
+//Create head sphere
+polySphere -radius 1 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 9.5 0;
+
+//create a cone for the nose
+polyCone -radius 0.1 -height 1 -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 0 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace - worldSpaceDistance -1.5 9.5 0;
+rotate -relative -objectSpace -forceOrderXYZ 0 0 90;
+
+//Create a cylinder as a hat
+polyCylinder -radius .5 -height 1 -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 11 0;
+
+//Create a second cylinder for the hat
+polyCylinder -radius 1 -height .3 -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 1 -axis 0 1 0 -roundCap 0 -createUVs 3 -constructionHistory 1;
+move -relative -objectSpace -worldSpaceDistance 0 10.4 0;
