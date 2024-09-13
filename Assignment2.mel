@@ -1,0 +1,30 @@
+float $heightOfTheSide = 10;
+float $widthAndDepthOfTheSide = .5;
+float $widthOfLadder = 1;
+
+string $object1[];
+$object1 = `polyCube -w $widthAndDepthOfTheSide -h $heightOfTheSide -d $widthAndDepthOfTheSide -sx 1 -sy 1 -sz 1 -ax 0 1 0 -cuv 4 -ch 1`;
+setAttr "polyCube1.heightBaseline" -1 $object1[0];
+
+string $object2[];
+$object2 = `duplicate -rr $object1[0]`;
+
+move -r (-$widthOfLadder) 0 0 $object1[0];
+move -r $widthOfLadder 0 0 $object2[0];
+
+string $object3[];
+$object3 = `polyCube -w 1 -h 1 -d 1 -sx 1 -sy 1 -sz 1 -ax 0 1 0 -cuv 4 -ch 1`;
+setAttr "polyCube2.width" ($widthOfLadder * 2) $object3;
+setAttr "polyCube2.height" ($widthAndDepthOfTheSide / 2) $object3;
+setAttr "polyCube2.depth" ($widthAndDepthOfTheSide / 2) $object3;
+move -r 0 1 0 $object3;
+
+int $i = 2;
+while ($i < $heightOfTheSide)
+{
+    string $tempObject[];
+    $tempObject = `duplicate -rr`;
+    move -r 0 1 0 $tempObject;
+    print($i);
+    $i++;
+}
