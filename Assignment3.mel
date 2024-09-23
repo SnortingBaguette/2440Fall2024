@@ -1,0 +1,20 @@
+proc CreateStaircase(int $numberOfStairs, float $stairLength, float $stairWidth, float $stairHeight, float $pivotOffset, float $stepHeight, float $stepRotation)
+{
+    float $currentStepRotation = 0;
+    for ($i = 0; $i < $numberOfStairs; $i++)
+    {
+        string $stair1[];
+        $stair1 = `polyCube -w $stairWidth -h $stairHeight -d $stairLength -sx 1 -sy 1 -sz 1 -ax 0 1 0 -cuv 4 -ch 1`;
+        move -r $pivotOffset 0 0 -pgp $stair1;
+        move -r (-$pivotOffset) 0 0 $stair1;
+        move -r 0 ($stepHeight * $i) 0;
+        rotate -r -fo 0 $currentStepRotation 0 $stair1;
+        $currentStepRotation += $stepRotation;
+    }
+    polyCylinder -r 1 -h 2 -sx 20 -sy 1 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 1;
+    setAttr "polyCylinder1.height" ($numberOfStairs * $stepHeight);
+    setAttr "polyCylinder1.radius" ($pivotOffset - ($stairWidth / 2));
+    move -r 0 ($numberOfStairs * $stepHeight / 2) 0;
+}
+
+CreateStaircase(100, 1, 5, .25, 3, .5, 15);
