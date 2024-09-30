@@ -1,0 +1,72 @@
+
+
+global proc Sum(float $num1, float $num2)
+{
+    string $answer = $num1 + $num2;
+    print($answer);
+}
+
+global proc Difference(float $num1, float $num2)
+{
+    string $answer = $num1 - $num2;
+    print($answer);
+}
+
+global proc Multiplication(float $num1, float $num2)
+{
+    string $answer = $num1 * $num2;
+    print($answer);
+}
+
+global proc Division(float $num1, float $num2)
+{
+    string $answer = $num1 / $num2;
+    print($answer);
+}
+
+global proc Power(float $num1, float $num2)
+{
+    string $answer = pow($num1, $num2);
+    print($answer);
+}
+
+global proc Mean(float $num1, float $num2)
+{
+    string $answer = ($num1 + $num2) / 2;
+    print($answer);
+}
+
+proc Calculator(float $num1, float $num2, int $operation)
+{
+    if ($operation == 1)
+    {
+        Sum($num1, $num2);
+    }
+    else if ($operation == 2)
+    {
+        Difference($num1, $num2);
+    }
+    else if ($operation == 3)
+    {
+        Multiplication($num1, $num2);
+    }
+    else if ($operation == 4)
+    {
+        Division($num1, $num2);
+    }
+    else if ($operation == 5)
+    {
+        Power($num1, $num2);
+    }
+    else if ($operation == 6)
+    {
+        Mean($num1, $num2);
+    }
+    else
+    {
+        print("Please enter a valid operation (Numbers 1 - 6).\n");
+    }
+
+}
+
+Calculator(74,256.78,7);
