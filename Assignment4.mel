@@ -1,30 +1,48 @@
-
-
-global proc Sum(float $num1, float $num2)
+global proc Sum(float $numbers[])
 {
-    string $answer = $num1 + $num2;
-    print($answer);
+    float $result;
+    int $size = size($numbers);
+    for($i = 0; $i < $size; $i++)
+    {
+        $result += $numbers[$i];
+    }
+    print($result);
 }
 
-global proc Difference(float $num1, float $num2)
+global proc Difference(float $numbers[])
 {
-    string $answer = $num1 - $num2;
-    print($answer);
+    float $result;
+    int $size = size($numbers);
+    for($i = 0; $i < $size; $i++)
+    {
+        $result -= $numbers[$i];
+    }
+    print($result);
 }
 
-global proc Multiplication(float $num1, float $num2)
+global proc Multiplication(float $numbers[])
 {
-    string $answer = $num1 * $num2;
-    print($answer);
+    float $result;
+    int $size = size($numbers);
+    for($i = 1; $i < $size; $i++)
+    {
+        $result *= $numbers[$i];
+    }
+    print($result);
 }
 
-global proc Division(float $num1, float $num2)
+global proc Division(float $numbers[])
 {
-    string $answer = $num1 / $num2;
-    print($answer);
+    float $result;
+    int $size = size($numbers);
+    for($i = 1; $i < $size; $i++)
+    {
+        $result /= $numbers[$i];
+    }
+    print($result);
 }
 
-global proc Power(float $num1, float $num2)
+/*global proc Power(float $num1, float $num2)
 {
     string $answer = pow($num1, $num2);
     print($answer);
@@ -34,34 +52,35 @@ global proc Mean(float $num1, float $num2)
 {
     string $answer = ($num1 + $num2) / 2;
     print($answer);
-}
+}*/
 
-proc Calculator(float $num1, float $num2, int $operation)
+proc Calculator(float $numbers[], int $operation)
 {
+    
     if ($operation == 1)
     {
-        Sum($num1, $num2);
+        Sum($numbers);
     }
     else if ($operation == 2)
     {
-        Difference($num1, $num2);
+        Difference($numbers);
     }
     else if ($operation == 3)
     {
-        Multiplication($num1, $num2);
+        Multiplication($numbers);
     }
     else if ($operation == 4)
     {
-        Division($num1, $num2);
+        Division($numbers);
     }
-    else if ($operation == 5)
+    /*else if ($operation == 5)
     {
-        Power($num1, $num2);
+        Power($numbers);
     }
     else if ($operation == 6)
     {
-        Mean($num1, $num2);
-    }
+        Mean($numbers);
+    }*/
     else
     {
         print("Please enter a valid operation (Numbers 1 - 6).\n");
@@ -69,4 +88,4 @@ proc Calculator(float $num1, float $num2, int $operation)
 
 }
 
-Calculator(74,256.78,7);
+Calculator({2,3,5}, 2);
