@@ -119,4 +119,4 @@ proc Calculator(float $numbers[], int $operation)
 
 }
 
-Calculator({2,3,4}, 7);
+Calculator({2,3,4}, 6);
