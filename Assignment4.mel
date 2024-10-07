@@ -42,16 +42,43 @@ global proc Division(float $numbers[])
     print($result);
 }
 
-/*global proc Power(float $num1, float $num2)
+global proc Power(float $numbers[])
 {
-    string $answer = pow($num1, $num2);
+    string $answer = pow($numbers[0], $numbers[1]);
     print($answer);
 }
 
-global proc Mean(float $num1, float $num2)
+global proc Mean(float $numbers[])
 {
-    string $answer = ($num1 + $num2) / 2;
-    print($answer);
+    float $result;
+    int $size = size($numbers);
+    for($i = 0; $i < $size; $i++)
+    {
+        $result += $numbers[$i];
+    }
+    $result = $result / $size;
+    print($result);
+}
+
+/*global proc Median(float $numbers[])
+{
+    int $result;
+    float $size = size($numbers);
+    if ($size % 2 == 1)
+    {
+        float $tempNum1;
+        $tempNum1 = $size / 2 + 0.5;
+        $result = ((int)$numbers[$tempNum1]);
+        print ($result);
+        
+    }
+    else 
+    {
+        print("Even");
+    }
+
+
+
 }*/
 
 proc Calculator(float $numbers[], int $operation)
@@ -73,13 +100,17 @@ proc Calculator(float $numbers[], int $operation)
     {
         Division($numbers);
     }
-    /*else if ($operation == 5)
+    else if ($operation == 5)
     {
         Power($numbers);
     }
     else if ($operation == 6)
     {
         Mean($numbers);
+    }
+    /*else if ($operation == 7)
+    {
+        Median($numbers);
     }*/
     else
     {
@@ -88,4 +119,4 @@ proc Calculator(float $numbers[], int $operation)
 
 }
 
-Calculator({2,3,5}, 2);
+Calculator({2,3,4}, 7);
