@@ -1,0 +1,77 @@
+global proc Scatter()
+{
+    string $xMinField = `optionVar -q "xMinField"`;
+    float $xMin = `floatField -q -value $xMinField`;
+    string $xMaxField = `optionVar -q "xMaxField"`;
+    float $xMax = `floatField -q -value $xMaxField`;
+    string $yMinField = `optionVar -q "yMinField"`;
+    float $yMin = `floatField -q -value $yMinField`;
+    string $yMaxField = `optionVar -q "yMaxField"`;
+    float $yMax = `floatField -q -value $yMaxField`;
+    string $zMinField = `optionVar -q "zMinField"`;
+    float $zMin = `floatField -q -value $zMinField`;
+    string $zMaxField = `optionVar -q "zMaxField"`;
+    float $zMax = `floatField -q -value $zMaxField`;
+    string $amountOfDuplicatesField = `optionVar -q "amountOfDuplicates"`;
+    int $amountOfDuplicates = `intField -q -value $amountOfDuplicatesField`;
+    print($amountOfDuplicates);
+    //float $minX = $tempNum;
+    string $obj;
+    string $sel[] = `ls -sl`;
+    for ($obj in $sel) {
+        //string $tembObj = stringArrayToString($sel[$objNumber], "");
+        //string $tembObj = duplicate (string($sel[$objNumber]));
+        for($i = 0; $i < $amountOfDuplicates; $i++)
+        {
+        string $temp[];
+        $temp = `duplicate ($obj)`;
+        float $randNumX = rand($xMin, $xMax);
+        setAttr ($temp[0] + ".translateX") $randNumX;
+        float $randNumY = rand($yMin, $yMax);
+        setAttr ($temp[0] + ".translateY") $randNumY;
+        float $randNumZ = rand($zMin, $zMax);
+        setAttr ($temp[0] + ".translateZ") $randNumZ;
+        print($randNumX);
+        }
+        
+        //print($obj + "\n");
+    }
+}
+//rand -80 42;
+
+
+global proc MainUI()
+{
+    string $mWindow = "ScatterWindow";
+    if(`window -exists $mWindow`)
+    {
+        deleteUI $mWindow;
+    }
+
+    $mWindow = `window -title "Scatter Tool"
+                                -widthHeight 300 400
+                                -resizeToFitChildren 1
+                                $mWindow`;
+    string $mColumn = `columnLayout -parent $mWindow -adjustableColumn 1`;
+    string $mRow = `rowLayout -numberOfColumns 3 -parent $mColumn`;
+    string $columnX = `columnLayout -parent $mRow -adjustableColumn 1`;
+    string $columnY = `columnLayout -parent $mRow -adjustableColumn 1`;
+    string $columnZ = `columnLayout -parent $mRow -adjustableColumn 1`;
+    optionVar -stringValue "xFieldText" `textField -parent $columnX -editable 0 -placeholderText "Values of X" `;
+    optionVar -stringValue "xMinField" `floatField -parent $columnX `;
+    optionVar -stringValue "xMaxField" `floatField -parent $columnX `;
+    optionVar -stringValue "yFieldText" `textField -parent $columnY -editable 0 -placeholderText "Values of Y" `;
+    optionVar -stringValue "yMinField" `floatField -parent $columnY `;
+    optionVar -stringValue "yMaxField" `floatField -parent $columnY `;
+    optionVar -stringValue "zFieldText" `textField -parent $columnZ -editable 0 -placeholderText "Values of Z" `;
+    optionVar -stringValue "zMinField" `floatField -parent $columnZ `;
+    optionVar -stringValue "zMaxField" `floatField -parent $columnZ `;
+    optionVar -stringValue "amountOfDuplicatesText" `textField -parent $mColumn -editable 0 -placeholderText "Amount of duplicates" `;
+    optionVar -stringValue "amountOfDuplicates" `intField -parent $mColumn `;
+    button -p $mColumn -command "Scatter" -label "Scatter!";
+
+
+    showWindow $mWindow;
+}
+
+MainUI();
