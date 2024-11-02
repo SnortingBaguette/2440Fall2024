@@ -1,0 +1,311 @@
+string $finalAnswer;
+global proc Sum(float $numbers[])
+{
+    $answerString = `optionVar -q "answerField"`;
+    $finalAnswer ="";
+    float $result;
+    int $size = size($numbers);
+    for($i = 0; $i < $size; $i++)
+    {
+        $result += $numbers[$i];
+    }
+
+    $finalAnswer += $numbers[0];
+    for($i = 1; $i < $size; $i++)
+    {
+        $finalAnswer += " + " + $numbers[$i];
+    }
+    $finalAnswer += " = " + $result;
+    textField -e -text $finalAnswer $answerString;
+}
+
+global proc Difference(float $numbers[])
+{
+    $answerString = `optionVar -q "answerField"`;
+    $finalAnswer ="";
+    float $result;
+    int $size = size($numbers);
+    for($i = 0; $i < $size; $i++)
+    {
+        $result -= $numbers[$i];
+    }
+
+    $finalAnswer += $numbers[0];
+    for($i = 1; $i < $size; $i++)
+    {
+        $finalAnswer += " - " + $numbers[$i];
+    }
+    $finalAnswer += " = " + $result;
+    textField -e -text $finalAnswer $answerString;
+
+}
+
+global proc Multiplication(float $numbers[])
+{
+    $answerString = `optionVar -q "answerField"`;
+    $finalAnswer ="";
+    float $result = $numbers[0];
+    int $size = size($numbers);
+    for($i = 1; $i < $size; $i++)
+    {
+        $result *= $numbers[$i];
+    }
+
+    $finalAnswer += $numbers[0];
+    for($i = 1; $i < $size; $i++)
+    {
+        $finalAnswer += " * " + $numbers[$i];
+    }
+    $finalAnswer += " = " + $result;
+    textField -e -text $finalAnswer $answerString;
+
+}
+
+global proc Division(float $numbers[])
+{
+    $answerString = `optionVar -q "answerField"`;
+    $finalAnswer ="";
+    float $result = $numbers[0];
+    int $size = size($numbers);
+    for($i = 1; $i < $size; $i++)
+    {
+        $result /= $numbers[$i];
+    }
+
+    $finalAnswer += $numbers[0];
+    for($i = 1; $i < $size; $i++)
+    {
+        $finalAnswer += " / " + $numbers[$i];
+    }
+    $finalAnswer += " = " + $result;
+    textField -e -text $finalAnswer $answerString;
+}
+
+global proc Power(float $numbers[])
+{
+    $answerString = `optionVar -q "answerField"`;
+    $finalAnswer ="";
+    string $answer = pow($numbers[0], $numbers[1]);
+    $finalAnswer = $numbers[0] + " ^ " + $numbers[1] + " = " + $answer;
+    textField -e -text $finalAnswer $answerString;
+}
+
+global proc Mean(float $numbers[])
+{
+    $answerString = `optionVar -q "answerField"`;
+    $finalAnswer ="";
+    float $result;
+    int $size = size($numbers);
+    for($i = 0; $i < $size; $i++)
+    {
+        $result += $numbers[$i];
+    }
+    $result = $result / $size;
+
+    $finalAnswer += "The Mean of " + $numbers[0];
+    for($i = 1; $i < $size; $i++)
+    {
+        $finalAnswer += ", " + $numbers[$i];
+    }
+    $finalAnswer += " is " + $result + ".";
+    textField -e -text $finalAnswer $answerString;
+}
+
+global proc Median(float $numbers[])
+{
+    $answerString = `optionVar -q "answerField"`;
+    $finalAnswer ="";
+    float $result;
+    float $size = size($numbers);
+    if ($size % 2 == 1)
+    {
+        int $tempNum1;
+        $tempNum1 = $size / 2 + 0.5;
+        $result = $numbers[int($tempNum1)];
+
+        $finalAnswer += "The Median of " + $numbers[0];
+        for($i = 1; $i < $size; $i++)
+        {
+            $finalAnswer += ", " + $numbers[$i];
+        }
+        $finalAnswer += " is " + $result + ".";
+        textField -e -text $finalAnswer $answerString;
+        
+    }
+    else 
+    {
+        int $tempNum1;
+        int $tempNum2;
+        $tempNum1 = $size / 2;
+        $tempNum1 = $size / 2 + 1;
+
+        $result = ($numbers[$tempNum1] + $numbers[$tempNum2]) / 2;
+
+                $finalAnswer += "The Median of " + $numbers[0];
+        for($i = 1; $i < $size; $i++)
+        {
+            $finalAnswer += ", " + $numbers[$i];
+        }
+        $finalAnswer += " is " + $result + ".";
+        textField -e -text $finalAnswer $answerString;
+    }
+
+
+
+}
+
+
+
+global proc Calculator(float $numbers[], int $operation)
+{
+    
+    if ($operation == 1)
+    {
+        Sum($numbers);
+    }
+    else if ($operation == 2)
+    {
+        Difference($numbers);
+    }
+    else if ($operation == 3)
+    {
+        Multiplication($numbers);
+    }
+    else if ($operation == 4)
+    {
+        Division($numbers);
+    }
+    else if ($operation == 5)
+    {
+        Power($numbers);
+    }
+    else if ($operation == 6)
+    {
+        Mean($numbers);
+    }
+    else if ($operation == 7)
+    {
+        Median($numbers);
+    }
+    else
+    {
+        print("Please enter a valid operation (Numbers 1 - 7).\n");
+    }
+
+}
+
+
+
+int $operationNumberFromButton;
+
+
+global proc AdditionButton()
+{
+    $operationNumberFromButton = 1;
+    ConvertFromButtonToFunc($operationNumberFromButton);
+}
+
+global proc SubtractionButton()
+{
+    $operationNumberFromButton = 2;
+    ConvertFromButtonToFunc($operationNumberFromButton);
+}
+
+global proc MultButton()
+{
+    $operationNumberFromButton = 3;
+    ConvertFromButtonToFunc($operationNumberFromButton);
+}
+
+global proc DivButton()
+{
+    $operationNumberFromButton = 4;
+    ConvertFromButtonToFunc($operationNumberFromButton);
+}
+
+global proc PowerButton()
+{
+    $operationNumberFromButton = 5;
+    ConvertFromButtonToFunc($operationNumberFromButton);
+}
+
+global proc MeanButton()
+{
+    $operationNumberFromButton = 6;
+    ConvertFromButtonToFunc($operationNumberFromButton);
+}
+
+global proc MedianButton()
+{
+    $operationNumberFromButton = 7;
+    ConvertFromButtonToFunc($operationNumberFromButton);
+}
+
+global proc ConvertFromButtonToFunc(int $num)
+{
+    string $userInput = `optionVar -q "userInput"`;
+    string $whatIsProcessed = `textField -q -text $userInput`;
+    int $incomingStringSize = size($whatIsProcessed);
+    string $stringArrayOfNumbers[];
+    int $slotInArray = 0;
+    string $temp;
+    string $temp2;
+    for ($i = 1; $i < ($incomingStringSize + 1); $i++)
+    {
+        $temp = `substring $whatIsProcessed $i $i`;
+        if($temp != ",")
+        {
+            $temp2 += $temp;
+        }
+        else
+        {
+            $stringArrayOfNumbers[$slotInArray] = $temp2;
+            $slotInArray ++;
+            $temp2 = "";
+        }
+        $stringArrayOfNumbers[$slotInArray] = $temp2;
+    }
+    float $numberArray[];
+    for($i = 0; $i < (size($stringArrayOfNumbers)); $i++)
+    {
+        $numberArray[$i] =  float($stringArrayOfNumbers[$i]);
+    }
+
+    Calculator($numberArray, $num);
+}
+
+
+global proc MainUI()
+{
+    string $mWindow = "Calculator";
+    if(`window -exists $mWindow`)
+    {
+        deleteUI $mWindow;
+    }
+
+    $mWindow = `window -title "Calculator"
+                                -widthHeight 300 400
+                                -resizeToFitChildren 1
+                                $mWindow`;
+                                
+    string $mColumn = `columnLayout -parent $mWindow -adjustableColumn 1`;
+    optionVar -stringValue "label" `textField -parent $mColumn -editable 0 -placeholderText "Put the numbers in spearated by a \",\"" `;
+    optionVar -stringValue "userInput" `textField -parent $mColumn `;
+    string $optionsRow = `rowLayout -numberOfColumns 3 -parent $mColumn -generalSpacing 30`;
+    string $optionsColumn1 = `columnLayout -parent $optionsRow -adjustableColumn 1`;
+    string $optionsColumn2 = `columnLayout -parent $optionsRow -adjustableColumn 1`;
+    string $optionsColumn3 = `columnLayout -parent $optionsRow -adjustableColumn 1`;
+    button -p $optionsColumn1 -command "AdditionButton" -label "Addition";
+    button -p $optionsColumn1 -command "SubtractionButton" -label "Subtraction";
+    button -p $optionsColumn2 -command "MultButton" -label "Multiplication";
+    button -p $optionsColumn2 -command "DivButton" -label "Division";
+    button -p $optionsColumn3 -command "PowerButton" -label "Power";
+    button -p $optionsColumn3 -command "MeanButton" -label "Mean";
+    button -p $mColumn -command "MedianButton" -label "Median";
+    
+    optionVar -stringValue "answerField" `textField -parent $mColumn -editable 0 -placeholderText "Answer"`;
+
+    showWindow $mWindow;
+}
+
+MainUI();
